@@ -1,3 +1,10 @@
+/build
+*.egg-info/
+_skbuild/
+__pycache__/
+/python/meeus/_bindings/*
+!/python/meeus/_bindings/__init__.py
+
 # Prerequisites
 *.d
 
