@@ -19,25 +19,25 @@ module date
    public :: make_jd_julian
 
 contains
-   function make_jd_julian(y, m, d, out) result(err) bind(c)
+   function make_jd_julian(out, y, m, d) result(err) bind(c)
       integer(c_int), value :: y, m
       real(c_float), value :: d
       type(jd), intent(out) :: out
       integer(c_int) :: err
 
-      err = create_jd_(y, m, d, CAL_JULIAN, out)
+      err = create_jd_(out, y, m, d, CAL_JULIAN)
    end function make_jd_julian
 
-   function make_jd_gregorian(y, m, d, out) result(err) bind(c)
+   function make_jd_gregorian(out, y, m, d) result(err) bind(c)
       integer(c_int), value :: y, m
       real(c_float), value :: d
       type(jd), intent(out) :: out
       integer(c_int) :: err
 
-      err = create_jd_(y, m, d, CAL_GREGORIAN, out)
+      err = create_jd_(out, y, m, d, CAL_GREGORIAN)
    end function make_jd_gregorian
 
-   function create_jd_(y, m, d, c, out) result(err)
+   function create_jd_(out, y, m, d, c) result(err)
       integer(c_int), value :: y, m
       real(c_float), value :: d
       integer, intent(in) :: c

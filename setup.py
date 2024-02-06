@@ -8,7 +8,8 @@ setup(
     license="Apache 2.0",
     packages=["meeus"],
     python_requires=">=3.7",
-    cmake_source_dir="..",
     cmake_with_sdist = True,
+    package_dir = {"": "python"},
+    package_data = {"meeus": ["_meeus_c_impl.so"]},
     zip_safe = False,
 )
