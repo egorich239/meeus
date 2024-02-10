@@ -59,9 +59,15 @@ class _SwigNonDynamicMeta(type):
 
 
 
-def make_jd_gregorian(out, y, m, d):
-    return _meeus_c_impl.make_jd_gregorian(out, y, m, d)
+def jm_jd_set_gregorian(out, y, m, d):
+    return _meeus_c_impl.jm_jd_set_gregorian(out, y, m, d)
 
-def make_jd_julian(out, y, m, d):
-    return _meeus_c_impl.make_jd_julian(out, y, m, d)
+def jm_jd_set_julian(out, y, m, d):
+    return _meeus_c_impl.jm_jd_set_julian(out, y, m, d)
+
+def jm_create_jd():
+    return _meeus_c_impl.jm_create_jd()
+
+def jm_free(arg1):
+    return _meeus_c_impl.jm_free(arg1)
 

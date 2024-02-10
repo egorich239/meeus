@@ -22,7 +22,8 @@ endif()
 set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} ${bounds}")
 set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${dialect}")
 
-add_library(objects OBJECT src/date.f90)
+file(GLOB MEEUS_SRC src/*.f90)
+add_library(objects OBJECT ${MEEUS_SRC})
 
 add_library(meeusStatic STATIC $<TARGET_OBJECTS:objects>)
 set_target_properties(meeusStatic PROPERTIES OUTPUT_NAME meeus)
@@ -36,13 +37,13 @@ if(SKBUILD)
 
     find_package(PythonLibs)
     include_directories(${PYTHON_INCLUDE_PATH})
-    include_directories(${CMAKE_SOURCE_DIR}/include)
+    include_directories(${CMAKE_SOURCE_DIR})
     set(CMAKE_SWIG_FLAGS "")
 
     swig_add_library(meeus_c_impl
         TYPE MODULE
         LANGUAGE python
-        SOURCES include/meeus.i)
+        SOURCES python/meeus/_c.i)
     set_source_files_properties(include/meeus.i PROPERTIES SWIG_FLAGS "-includeall")
     set_property(SOURCE include/meeus.i PROPERTY USE_LIBRARY_INCLUDE_DIRECTORIES TRUE)
     set_property(TARGET meeusStatic PROPERTY SWIG_USE_TARGET_INCLUDE_DIRECTORIES TRUE)
